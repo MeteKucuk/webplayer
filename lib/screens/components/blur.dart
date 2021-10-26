@@ -3,20 +3,31 @@ import 'dart:ui';
 import "package:flutter/material.dart";
 
 class Blur extends StatelessWidget {
-  // ignore: prefer_const_constructors_in_immutables
-  Blur({Key? key, required this.width, required this.height}) : super(key: key);
-  late final double width;
-  late final double height;
+  const Blur({
+    Key? key,
+    required this.width,
+    required this.height,
+    this.color,
+  }) : super(key: key);
+  final double width;
+  final double height;
+  final Color? color;
+
   @override
   Widget build(BuildContext context) {
     return ClipRect(
+      clipBehavior: Clip.antiAlias,
       child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 7.0, sigmaY: 7.0),
+        filter: ImageFilter.blur(
+          sigmaX: 7.0,
+          sigmaY: 7.0,
+        ),
         child: Container(
           width: width,
           height: height,
-          decoration:
-              BoxDecoration(color: Colors.grey.shade800.withOpacity(0.2)),
+          decoration: BoxDecoration(
+            color: color ?? Colors.grey.shade800.withOpacity(0.2),
+          ),
         ),
       ),
     );
