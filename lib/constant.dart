@@ -36,14 +36,14 @@ class Constant {
     fontWeight: FontWeight.w500,
     letterSpacing: 2.0,
   );
-  static final bodyText1 = TextStyle(
+  static const bodyText1 = TextStyle(
     color: Colors.grey,
     fontSize: 14.0,
     fontFamily: 'Montserrat',
     fontWeight: FontWeight.w600,
     letterSpacing: 1.0,
   );
-  static final bodySelectedText = TextStyle(
+  static const bodySelectedText = TextStyle(
     color: Colors.white,
     fontSize: 14.0,
     fontFamily: 'Montserrat',

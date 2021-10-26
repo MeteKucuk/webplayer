@@ -91,9 +91,9 @@ class Home extends StatelessWidget {
         ),
       );
     } else if (playlistController.selectedPage.value == 3) {
-      return Expanded(child: SuggestionScreen());
+      return const Expanded(child: SuggestionScreen());
     } else if (playlistController.selectedPage.value == 0) {
-      return Expanded(child: const HomePage());
+      return const Expanded(child: HomePage());
     } else {
       return const CircularProgressIndicator();
     }

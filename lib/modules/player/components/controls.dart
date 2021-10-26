@@ -64,8 +64,8 @@ class _ControlsState extends State<Controls> {
             height: 15,
             child: ProgressBar(
               progress: _duration,
-              buffered: Duration(milliseconds: 100000),
-              total: Duration(milliseconds: 100000),
+              buffered: const Duration(milliseconds: 100000),
+              total: const Duration(milliseconds: 100000),
               timeLabelLocation: TimeLabelLocation.sides,
               timeLabelTextStyle: const TextStyle(
                 color: Colors.blueGrey,

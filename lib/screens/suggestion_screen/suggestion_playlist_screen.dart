@@ -4,6 +4,8 @@ import 'package:music_player/screens/suggestion_screen/widgets/Suggestion_Playli
 import 'package:music_player/widgets/appbar.dart';
 
 class SuggestionScreen extends StatefulWidget {
+  const SuggestionScreen({Key? key}) : super(key: key);
+
   @override
   _SuggestionScreenState createState() => _SuggestionScreenState();
 }

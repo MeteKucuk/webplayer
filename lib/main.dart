@@ -5,13 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:music_player/screens/home.dart';
-import 'package:music_player/screens/login_screen/login_screen.dart';
-import 'package:music_player/screens/side_menu/side_menu.dart';
-import 'package:music_player/screens/suggestion_screen/suggestion_playlist_screen.dart';
 
 import 'controller/playlist.dart';
-import 'screens/playlist_screen/playlist_screen.dart';
-import 'services/data_service.dart';
 
 void main() async {
   Get.put(CurrentTrackController());
@@ -22,7 +17,7 @@ void main() async {
           Platform.isAndroid ||
           Platform.isLinux ||
           Platform.isWindows)) {
-    await DesktopWindow.setMinWindowSize(Size(600, 800));
+    await DesktopWindow.setMinWindowSize(const Size(600, 800));
 
     await DesktopWindow.setMinWindowSize(
       const Size(600, 800),

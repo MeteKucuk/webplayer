@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: camel_case_types, must_be_immutable
 class appBar extends StatelessWidget with PreferredSizeWidget {
   appBar({
     Key? key,

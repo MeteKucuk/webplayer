@@ -157,7 +157,7 @@ class _SuggestionPlaylistState extends State<SuggestionPlaylist> {
                     dense: true,
                     title: Text(
                       yourLibrary[4],
-                      style: playlistController.selectedPage == 4
+                      style: playlistController.selectedPage.value == 4
                           ? const TextStyle(
                               color: Colors.white,
                             )

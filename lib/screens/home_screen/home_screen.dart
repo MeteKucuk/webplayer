@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   TextButton(
                       onPressed: () {},
-                      child: Text(
+                      child: const Text(
                         'Hepsini Gör',
                         style: Constant.bodySelectedText,
                       )),
@@ -73,52 +73,13 @@ class _HomePageState extends State<HomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     'POP',
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
                   TextButton(
                       onPressed: () {},
-                      child: Text(
-                        'Hepsini Gör',
-                        style: Constant.bodySelectedText,
-                      )),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                // Another fixed-height child.
-                // Green
-                height: 200.0,
-                alignment: Alignment.center,
-                child: ScrollConfiguration(
-                  behavior: MyCustomScrollBehavior(),
-                  child: ListView.builder(
-                      itemCount: playlistController.songList.length,
-                      scrollDirection: Axis.horizontal,
-                      controller: controller,
-                      itemBuilder: (BuildContext context, int index) {
-                        return HomeScreenCard(
-                          title: '${playlistController.songList[index].name}  ',
-                        );
-                      }),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'POP',
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                  ),
-                  TextButton(
-                      onPressed: () {},
-                      child: Text(
+                      child: const Text(
                         'Hepsini Gör',
                         style: Constant.bodySelectedText,
                       )),
@@ -145,16 +106,55 @@ class _HomePageState extends State<HomePage> {
                       }),
                 ),
               ),
+              const SizedBox(
+                height: 20,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     'POP',
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
                   TextButton(
                       onPressed: () {},
-                      child: Text(
+                      child: const Text(
+                        'Hepsini Gör',
+                        style: Constant.bodySelectedText,
+                      )),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Container(
+                // Another fixed-height child.
+                // Green
+                height: 200.0,
+                alignment: Alignment.center,
+                child: ScrollConfiguration(
+                  behavior: MyCustomScrollBehavior(),
+                  child: ListView.builder(
+                      itemCount: playlistController.songList.length,
+                      scrollDirection: Axis.horizontal,
+                      controller: controller,
+                      itemBuilder: (BuildContext context, int index) {
+                        return HomeScreenCard(
+                          title: '${playlistController.songList[index].name}  ',
+                        );
+                      }),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'POP',
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  ),
+                  TextButton(
+                      onPressed: () {},
+                      child: const Text(
                         'Hepsini Gör',
                         style: Constant.bodySelectedText,
                       )),
