@@ -32,11 +32,7 @@ class _PlayListScreenState extends State<PlayListScreen> {
       body: Container(
         width: double.infinity,
         decoration: const BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [Color(0xff67D9C6), Color(0xff34465D)],
-              stops: [0, 0.3]),
+          color: Color(0xff34465D),
         ),
         child: Scrollbar(
           isAlwaysShown: true,

@@ -9,9 +9,9 @@ class SuggestionScreen extends StatefulWidget {
 }
 
 class _SuggestionScreenState extends State<SuggestionScreen> {
-  final playlistHeaderController = CurrentTrackController.to;
+  final playlistController = CurrentTrackController.to;
   bool isHover = false;
-  Offset mousPos = new Offset(0, 0);
+  Offset mousPos = const Offset(0, 0);
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +26,8 @@ class _SuggestionScreenState extends State<SuggestionScreen> {
           gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [Color(0xff67D9C6), Color(0xff34465D)],
-              stops: [0, 0.5]),
+              colors: [Color(0xff34465D), Color(0xff34465D)],
+              stops: [0, 0.3]),
         ),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           const Expanded(
@@ -43,7 +43,7 @@ class _SuggestionScreenState extends State<SuggestionScreen> {
               children: [
                 Expanded(
                   child: GridView.builder(
-                    itemCount: playlistHeaderController.playlist.length,
+                    itemCount: playlistController.songList.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
 
@@ -53,8 +53,7 @@ class _SuggestionScreenState extends State<SuggestionScreen> {
                             mainAxisSpacing: 20,
                             crossAxisSpacing: 50),
                     itemBuilder: (context, index) => SuggestionPlaylist_Card(
-                      title:
-                          '${playlistHeaderController.playlist[index].name}  ',
+                      title: '${playlistController.songList[index].name}  ',
                     ),
                   ),
                 ),

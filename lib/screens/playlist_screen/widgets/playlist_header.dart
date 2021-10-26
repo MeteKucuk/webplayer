@@ -61,7 +61,8 @@ class PlayListHeader extends StatelessWidget {
                         style: Constant.bodyText1,
                       ),
                       Text(
-                        '${playlistHeaderController.durationCover(playlistHeaderController.active.value.duration)}',
+                        playlistHeaderController.durationCover(
+                            playlistHeaderController.active.value.duration),
                         style: Constant.bodyText1,
                       ),
                     ]),
@@ -96,7 +97,7 @@ class _PlayListButtons extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
-            backgroundColor: Colors.green,
+            backgroundColor: const Color(0xff36676b),
             primary: Colors.white,
           ),
         )

@@ -12,7 +12,7 @@ class appBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Color(0xf967D9C6),
+      backgroundColor: const Color(0xff36676b),
       elevation: 0,
       leadingWidth: 140.0,
       leading: const Padding(

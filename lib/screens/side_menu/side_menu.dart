@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:music_player/screens/side_menu/widgets/sidemenu_icontab.dart';
 
-import '../constant.dart';
-import '../controller/playlist.dart';
-import '../data/data.dart';
+import '../../constant.dart';
+import '../../controller/playlist.dart';
+import '../../data/data.dart';
 
 class SideMenu extends StatelessWidget {
   final playlistController = CurrentTrackController.to;
@@ -31,26 +32,50 @@ class SideMenu extends StatelessWidget {
             ],
           ),
           // ignore: prefer_const_constructors
-          SideMenuIconTab(
-            onTap: () {
-              playlistController.selectedPage.value = 0;
-            },
-            title: yourLibrary[0],
-            iconData: Icons.home,
+          Obx(
+            () => SideMenuIconTab(
+              colorIcon: playlistController.selectedPage.value == 0
+                  ? Colors.white
+                  : Colors.grey,
+              textStyle: playlistController.selectedPage.value == 0
+                  ? Constant.bodySelectedText
+                  : Constant.bodyText1,
+              onTap: () {
+                playlistController.selectedPage.value = 0;
+              },
+              title: yourLibrary[0],
+              iconData: Icons.home,
+            ),
           ),
-          SideMenuIconTab(
-            onTap: () {
-              playlistController.selectedPage.value = 1;
-            },
-            title: yourLibrary[1],
-            iconData: Icons.search,
+          Obx(
+            () => SideMenuIconTab(
+              colorIcon: playlistController.selectedPage.value == 1
+                  ? Colors.white
+                  : Colors.grey,
+              textStyle: playlistController.selectedPage.value == 1
+                  ? Constant.bodySelectedText
+                  : Constant.bodyText1,
+              onTap: () {
+                playlistController.selectedPage.value = 1;
+              },
+              title: yourLibrary[1],
+              iconData: Icons.search,
+            ),
           ),
-          SideMenuIconTab(
-            onTap: () {
-              playlistController.selectedPage.value = 2;
-            },
-            title: yourLibrary[2],
-            iconData: Icons.playlist_add,
+          Obx(
+            () => SideMenuIconTab(
+              colorIcon: playlistController.selectedPage.value == 2
+                  ? Colors.white
+                  : Colors.grey,
+              textStyle: playlistController.selectedPage.value == 2
+                  ? Constant.bodySelectedText
+                  : Constant.bodyText1,
+              onTap: () {
+                playlistController.selectedPage.value = 2;
+              },
+              title: yourLibrary[2],
+              iconData: Icons.playlist_add,
+            ),
           ),
           const SizedBox(
             height: 12.0,
@@ -59,34 +84,6 @@ class SideMenu extends StatelessWidget {
           const SuggestionPlaylist(),
         ],
       ),
-    );
-  }
-}
-
-class SideMenuIconTab extends StatelessWidget {
-  const SideMenuIconTab({
-    Key? key,
-    required this.iconData,
-    required this.title,
-    required this.onTap,
-  }) : super(key: key);
-  final IconData iconData;
-  final String title;
-  final VoidCallback onTap;
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: Icon(
-        iconData,
-        color: Colors.white,
-        size: 28.0,
-      ),
-      title: Text(
-        title,
-        style: Constant.bodyText1,
-        overflow: TextOverflow.ellipsis,
-      ),
-      onTap: onTap,
     );
   }
 }
@@ -142,6 +139,7 @@ class _SuggestionPlaylistState extends State<SuggestionPlaylist> {
                     dense: true,
                     title: Text(
                       yourLibrary[3],
+                      // ignore: unrelated_type_equality_checks
                       style: playlistController.selectedPage == 3
                           ? const TextStyle(
                               color: Colors.white,

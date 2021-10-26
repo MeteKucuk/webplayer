@@ -30,17 +30,23 @@ class Constant {
   );
 
   static final headline4 = TextStyle(
-    fontSize: 12.0,
+    fontSize: 18.0,
     fontFamily: 'Montserrat',
     color: Colors.grey[300],
     fontWeight: FontWeight.w500,
     letterSpacing: 2.0,
   );
   static final bodyText1 = TextStyle(
-    color: Colors.grey[300],
+    color: Colors.grey,
     fontSize: 14.0,
     fontFamily: 'Montserrat',
     fontWeight: FontWeight.w600,
+    letterSpacing: 1.0,
+  );
+  static final bodySelectedText = TextStyle(
+    color: Colors.white,
+    fontSize: 14.0,
+    fontFamily: 'Montserrat',
     letterSpacing: 1.0,
   );
   static final bodyText2 = TextStyle(

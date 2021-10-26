@@ -2,12 +2,16 @@ import 'dart:io';
 
 import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:music_player/screens/home.dart';
+import 'package:music_player/screens/login_screen/login_screen.dart';
+import 'package:music_player/screens/side_menu/side_menu.dart';
+import 'package:music_player/screens/suggestion_screen/suggestion_playlist_screen.dart';
 
 import 'controller/playlist.dart';
-import 'screens/home.dart';
+import 'screens/playlist_screen/playlist_screen.dart';
+import 'services/data_service.dart';
 
 void main() async {
   Get.put(CurrentTrackController());
@@ -38,16 +42,6 @@ class MyApp extends StatelessWidget {
         iconTheme: const IconThemeData().copyWith(color: Colors.white),
       ),
       home: Home(),
-      scrollBehavior: CustomScrollBehavior(),
     );
   }
-}
-
-class CustomScrollBehavior extends MaterialScrollBehavior {
-  // Override behavior methods and getters like dragDevices
-  @override
-  Set<PointerDeviceKind> get dragDevices => {
-        PointerDeviceKind.touch,
-        PointerDeviceKind.mouse,
-      };
 }

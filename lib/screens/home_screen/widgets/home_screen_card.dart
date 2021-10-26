@@ -1,28 +1,20 @@
-// ignore_for_file: camel_case_types, file_names
-
 import 'package:flutter/material.dart';
 import 'package:music_player/controller/playlist.dart';
 
-class SuggestionPlaylist_Card extends StatefulWidget {
+class HomeScreenCard extends StatefulWidget {
   final String? title;
 
-  const SuggestionPlaylist_Card({
-    Key? key,
-    required this.title,
-  }) : super(key: key);
-
+  const HomeScreenCard({Key? key, this.title}) : super(key: key);
   @override
-  State<SuggestionPlaylist_Card> createState() =>
-      _SuggestionPlaylist_CardState();
+  _HomeScreenCardState createState() => _HomeScreenCardState();
 }
 
-class _SuggestionPlaylist_CardState extends State<SuggestionPlaylist_Card> {
+class _HomeScreenCardState extends State<HomeScreenCard> {
   bool isHover = false;
 
   Offset mousPos = const Offset(0, 0);
 
   final playlistHeaderController = CurrentTrackController.to;
-
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -45,7 +37,10 @@ class _SuggestionPlaylist_CardState extends State<SuggestionPlaylist_Card> {
             });
           },
           child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20),
             padding: const EdgeInsets.all(20),
+            height: 220,
+            width: 150,
             decoration: BoxDecoration(
                 gradient: isHover
                     ? const LinearGradient(
@@ -60,7 +55,11 @@ class _SuggestionPlaylist_CardState extends State<SuggestionPlaylist_Card> {
                         stops: [0.1, 1]),
                 borderRadius: BorderRadius.circular(16)),
             child: Column(children: [
-              Image.network('${playlistHeaderController.playlist[1].cover}'),
+              Container(
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(1000)),
+                  child: Image.network(
+                      '${playlistHeaderController.playlist[1].cover}')),
               const SizedBox(
                 height: 20,
               ),

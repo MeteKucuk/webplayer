@@ -4,8 +4,10 @@ import 'package:music_player/modules/player/player.dart';
 
 import '../controller/playlist.dart';
 import '../services/data_service.dart';
-import '../widgets/side_menu.dart';
+
+import 'home_screen/home_screen.dart';
 import 'playlist_screen/playlist_screen.dart';
+import 'side_menu/side_menu.dart';
 import 'suggestion_screen/suggestion_playlist_screen.dart';
 
 class Home extends StatelessWidget {
@@ -90,6 +92,8 @@ class Home extends StatelessWidget {
       );
     } else if (playlistController.selectedPage.value == 3) {
       return Expanded(child: SuggestionScreen());
+    } else if (playlistController.selectedPage.value == 0) {
+      return Expanded(child: const HomePage());
     } else {
       return const CircularProgressIndicator();
     }
