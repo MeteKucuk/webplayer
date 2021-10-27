@@ -1,9 +1,16 @@
 import "package:flutter/material.dart";
+import 'package:just_audio/just_audio.dart';
 import 'package:music_player/modules/player/components/control_button.dart';
 
 class VolumeController extends StatefulWidget {
-  const VolumeController({Key? key, this.onChange}) : super(key: key);
-  final VolumeCallback? onChange;
+  const VolumeController({
+    Key? key,
+    required this.player,
+    required this.disabled,
+  }) : super(key: key);
+
+  final AudioPlayer player;
+  final bool disabled;
 
   @override
   _VolumeControllerState createState() => _VolumeControllerState();
@@ -20,19 +27,8 @@ class _VolumeControllerState extends State<VolumeController> {
       children: [
         ControlButton(
           icon: _isMuted ? Icons.volume_off : Icons.volume_up,
-          disabled: widget.onChange == null ? true : false,
-          callback: () {
-            setState(() {
-              if (!_isMuted) {
-                _lastValue = value;
-                value = 0;
-              } else {
-                value = _lastValue;
-              }
-
-              _isMuted = !_isMuted;
-            });
-          },
+          disabled: widget.disabled ? true : false,
+          callback: _handleMuteButton,
           tip: _isMuted ? "Sesi Aç" : "Sesi Kapat",
         ),
         Container(
@@ -56,7 +52,7 @@ class _VolumeControllerState extends State<VolumeController> {
               max: 100,
               divisions: 20,
               label: value.round().toString(),
-              onChanged: widget.onChange == null ? null : _handleChange,
+              onChanged: widget.disabled ? null : _handleChange,
             ),
           ),
         )
@@ -64,8 +60,24 @@ class _VolumeControllerState extends State<VolumeController> {
     );
   }
 
-  _handleChange(double value) {
-    widget.onChange!(value);
+  _handleMuteButton() {
+    setState(() {
+      if (!_isMuted) {
+        _lastValue = value;
+        value = 0;
+      } else {
+        value = _lastValue;
+      }
+
+      _isMuted = !_isMuted;
+    });
+
+    widget.player.setVolume(value / 100.0);
+  }
+
+  _handleChange(double value) async {
+    await widget.player.setVolume(value / 100.0);
+
     setState(() {
       _isMuted = value == 0 ? true : false;
       this.value = value;

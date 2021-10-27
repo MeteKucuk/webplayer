@@ -1,30 +1,38 @@
 import "package:flutter/material.dart";
-import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:music_player/model/track.dart';
-import 'package:music_player/modules/player/constants.dart';
+import 'package:music_player/modules/player/constants/constants.dart';
 import 'components/controls.dart';
 import 'components/volume_controller.dart';
 import 'controller.dart';
 import '../../screens/components/blur.dart';
 
 class View extends StatefulWidget {
-  const View({Key? key}) : super(key: key);
+  const View({Key? key, required this.player}) : super(key: key);
+  final AudioPlayer player;
 
   @override
   State<View> createState() => _ViewState();
 }
 
 class _ViewState extends State<View> {
-  Color color = Colors.white;
+  final Controller _controller = Get.find();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
 
-    return GetX(
-      init: Controller(),
-      builder: (Controller _controller) {
+    return GetX<Controller>(
+      init: _controller,
+      builder: (_controller) {
         var track = _controller.track.value;
+        bool disabled = _controller.disabled.value;
 
         return Padding(
           padding: EdgeInsets.only(
@@ -64,13 +72,14 @@ class _ViewState extends State<View> {
                               children: [
                                 _createTrackTexts(track),
                                 Controls(
-                                  disabled: _controller.disabled.value,
+                                  player: widget.player,
+                                  disabled: disabled,
                                   track: track,
+                                  onPause: _onPause,
                                 ),
                                 VolumeController(
-                                  onChange: _controller.disabled.value
-                                      ? null
-                                      : _handleVolume,
+                                  player: widget.player,
+                                  disabled: disabled,
                                 ),
                               ],
                             ),
@@ -98,8 +107,10 @@ class _ViewState extends State<View> {
     );
   }
 
-  _handleVolume(double value) {
-    //TODO implement volume control logic
+  ///Update player state on contoller,
+  ///this is for logging about player state while a song selected
+  _onPause() {
+    _controller.isPlaying.value = false;
   }
 
   Widget _createTrackTexts(Track track) {
