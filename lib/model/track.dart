@@ -42,6 +42,7 @@ class Track {
         id: json["id"],
         name: json["name"],
         url: json["url"],
+        cover: json["cover"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -53,5 +54,6 @@ class Track {
         "id": id,
         "name": name,
         "url": url,
+        "cover": cover,
       };
 }
