@@ -4,15 +4,14 @@
 
 import 'dart:convert';
 
-List<PlaylistContent> playlistContentFromJson(String str) =>
-    List<PlaylistContent>.from(
-        json.decode(str).map((x) => PlaylistContent.fromJson(x)));
+List<Track> trackFromJson(String str) =>
+    List<Track>.from(json.decode(str).map((x) => Track.fromJson(x)));
 
-String playlistContentToJson(List<PlaylistContent> data) =>
+String trackToJson(List<Track> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class PlaylistContent {
-  PlaylistContent({
+class Track {
+  Track({
     this.album,
     this.artist,
     this.duration,
@@ -21,10 +20,12 @@ class PlaylistContent {
     this.id,
     this.name,
     this.url,
+    this.cover,
   });
 
   String? album;
   String? artist;
+  String? cover;
   int? duration;
   bool? explict;
   String? genre;
@@ -32,8 +33,7 @@ class PlaylistContent {
   String? name;
   String? url;
 
-  factory PlaylistContent.fromJson(Map<String, dynamic> json) =>
-      PlaylistContent(
+  factory Track.fromJson(Map<String, dynamic> json) => Track(
         album: json["album"],
         artist: json["artist"],
         duration: json["duration"],

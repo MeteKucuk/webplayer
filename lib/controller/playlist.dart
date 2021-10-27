@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
 import '../model/playlist.dart';
-import '../model/playlist_content.dart';
+import '../model/track.dart';
 import '../services/data_service.dart';
 
 class CurrentTrackController extends GetxController {
   static CurrentTrackController get to => Get.find<CurrentTrackController>();
 
-  final songList = <PlaylistContent>[].obs;
+  final songList = <Track>[].obs;
 
   final playlist = <PlayList>[].obs;
 

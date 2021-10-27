@@ -64,8 +64,9 @@ class _LoginFormState extends State<LoginForm> {
                         vertical: 20, horizontal: 75),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        String email = mailController.text.trim();
-                        String password = passwordController.text;
+                        //TODO implement login logic
+                        /* String email = mailController.text.trim();
+                        String password = passwordController.text; */
                       }
                     },
                   )

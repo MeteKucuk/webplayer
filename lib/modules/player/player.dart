@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:music_player/modules/player/controller.dart';
 import 'package:music_player/modules/player/view.dart';
 
@@ -6,10 +7,11 @@ import 'package:music_player/modules/player/view.dart';
 class Player {
   static final Player _player = Player._init();
   final View _view = const View();
-  late Controller _controller;
+  final audioPlayer = AudioPlayer();
+  late Controller controller;
 
   Player._init() {
-    _controller = Get.put(Controller());
+    controller = Get.put(Controller());
   }
 
   factory Player() {

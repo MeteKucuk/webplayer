@@ -1,13 +1,16 @@
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import "package:flutter/material.dart";
+import 'package:music_player/model/track.dart';
 import 'package:music_player/modules/player/components/control_button.dart';
 
 class Controls extends StatefulWidget {
   const Controls({
     Key? key,
     this.disabled = false,
+    required this.track,
   }) : super(key: key);
   final bool disabled;
+  final Track track;
 
   @override
   _ControlsState createState() => _ControlsState();
@@ -33,7 +36,6 @@ class _ControlsState extends State<Controls> {
                   icon: Icons.skip_previous,
                   disabled: widget.disabled,
                   callback: () {
-                    print("prev");
                     //TODO implement player logic
                   },
                 ),
@@ -53,7 +55,6 @@ class _ControlsState extends State<Controls> {
                   icon: Icons.skip_next,
                   disabled: widget.disabled,
                   callback: () {
-                    print("next");
                     //TODO implement player logic
                   },
                 ),
@@ -62,26 +63,33 @@ class _ControlsState extends State<Controls> {
           ),
           SizedBox(
             height: 15,
-            child: ProgressBar(
-              progress: _duration,
-              buffered: const Duration(milliseconds: 100000),
-              total: const Duration(milliseconds: 100000),
-              timeLabelLocation: TimeLabelLocation.sides,
-              timeLabelTextStyle: const TextStyle(
-                color: Colors.blueGrey,
-                fontSize: 12,
-              ),
-              thumbRadius: 6,
-              onSeek: (duration) {
-                if (!widget.disabled) {
-                  print('User selected a new time: $duration');
-                  setState(() {
-                    _duration = duration;
-                  });
-                }
-              },
-              onDragUpdate: _handleDrag,
-              onDragStart: _handleDrag,
+            child: Stack(
+              children: [
+                ProgressBar(
+                  progress: _duration,
+                  total: Duration(milliseconds: widget.track.duration ?? 0),
+                  timeLabelLocation: TimeLabelLocation.sides,
+                  timeLabelTextStyle: const TextStyle(
+                    color: Colors.blueGrey,
+                    fontSize: 12,
+                  ),
+                  thumbRadius: 6,
+                  onSeek: (duration) {
+                    //TODO: implement track seek logic
+                    setState(() {
+                      _duration = duration;
+                    });
+                  },
+                  onDragUpdate: _handleDrag,
+                  onDragStart: _handleDrag,
+                ),
+                //Block progress bar when controls are disabled
+                if (widget.disabled)
+                  Container(
+                    height: 15,
+                    color: Colors.transparent,
+                  ),
+              ],
             ),
           ),
         ],
@@ -90,10 +98,8 @@ class _ControlsState extends State<Controls> {
   }
 
   void _handleDrag(details) {
-    if (!widget.disabled) {
-      setState(() {
-        _duration = details.timeStamp;
-      });
-    }
+    setState(() {
+      _duration = details.timeStamp;
+    });
   }
 }
