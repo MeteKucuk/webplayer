@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:music_player/modules/player/player.dart';
-
+import 'package:music_player/screens/create_playlist_screen/create_playlist_screen.dart';
 import '../controller/playlist.dart';
 import '../services/data_service.dart';
 
@@ -94,6 +94,8 @@ class Home extends StatelessWidget {
       return const Expanded(child: SuggestionScreen());
     } else if (playlistController.selectedPage.value == 0) {
       return const Expanded(child: HomePage());
+    } else if (playlistController.selectedPage.value == 2) {
+      return const Expanded(child: CreatePlaylist());
     } else {
       return const CircularProgressIndicator();
     }

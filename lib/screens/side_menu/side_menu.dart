@@ -23,9 +23,10 @@ class SideMenu extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Image.asset(
-                  'assets/trt.png',
-                  height: 55.0,
+                child: Image.network(
+                  'https://www.pngall.com/wp-content/uploads/2/Sound-Waves-PNG.png',
+                  height: 65.0,
+                  width: 200,
                   filterQuality: FilterQuality.high,
                 ),
               ),

@@ -27,4 +27,13 @@ class DataServices {
       return null;
     }
   }
+
+  static Future<void> createPlaylist() async {
+    await client.post(
+      Uri.parse(
+          'https://qrcodeapp-be484-default-rtdb.firebaseio.com/playlists/.json'),
+      body: {},
+      headers: {},
+    );
+  }
 }
