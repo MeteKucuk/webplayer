@@ -1,7 +1,7 @@
 // ignore_for_file: camel_case_types, file_names
 
 import 'package:flutter/material.dart';
-import 'package:music_player/controller/playlist.dart';
+import 'package:music_player/controller/playlist_controller.dart';
 
 class SuggestionPlaylist_Card extends StatefulWidget {
   final String? title;
@@ -21,7 +21,7 @@ class _SuggestionPlaylist_CardState extends State<SuggestionPlaylist_Card> {
 
   Offset mousPos = const Offset(0, 0);
 
-  final playlistHeaderController = CurrentTrackController.to;
+  final playlistHeaderController = PlaylistController.to;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,7 @@ class _SuggestionPlaylist_CardState extends State<SuggestionPlaylist_Card> {
                       stops: [0.1, 1]),
               borderRadius: BorderRadius.circular(16)),
           child: Column(children: [
-            Image.network('${playlistHeaderController.playlist[1].cover}'),
+            Image.network('${playlistHeaderController.playlists[1].cover}'),
             const SizedBox(
               height: 20,
             ),

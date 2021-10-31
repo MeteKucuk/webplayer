@@ -4,20 +4,23 @@
 
 import 'dart:convert';
 
-List<PlayList> playListFromJson(String str) =>
-    List<PlayList>.from(json.decode(str).map((x) => PlayList.fromJson(x)));
+import 'package:music_player/model/track.dart';
 
-String playListToJson(List<PlayList> data) =>
+List<Playlist> playListFromJson(String str) =>
+    List<Playlist>.from(json.decode(str).map((x) => Playlist.fromJson(x)));
+
+String playListToJson(List<Playlist> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class PlayList {
-  PlayList({
+class Playlist {
+  Playlist({
     this.cover,
     this.duration,
     this.id,
     this.length,
     this.name,
     this.owner,
+    this.tracks = const <Track>[],
   });
 
   String? cover;
@@ -26,14 +29,16 @@ class PlayList {
   int? length;
   String? name;
   Owner? owner;
+  List<Track> tracks;
 
-  factory PlayList.fromJson(Map<String, dynamic> json) => PlayList(
+  factory Playlist.fromJson(Map<String, dynamic> json) => Playlist(
         cover: json["cover"],
         duration: json["duration"].toDouble(),
         id: json["id"],
         length: json["length"],
         name: json["name"],
         owner: Owner.fromJson(json["owner"]),
+        tracks: json['tracks'] ?? <Track>[],
       );
 
   Map<String, dynamic> toJson() => {
@@ -43,6 +48,7 @@ class PlayList {
         "length": length,
         "name": name,
         "owner": owner?.toJson(),
+        "tracks": trackToJson(tracks),
       };
 }
 

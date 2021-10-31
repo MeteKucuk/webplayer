@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:music_player/controller/playlist.dart';
+import 'package:music_player/controller/playlist_controller.dart';
 
 class HomeScreenCard extends StatefulWidget {
   final String? title;
@@ -14,7 +14,7 @@ class _HomeScreenCardState extends State<HomeScreenCard> {
 
   Offset mousPos = const Offset(0, 0);
 
-  final playlistHeaderController = CurrentTrackController.to;
+  final playlistHeaderController = PlaylistController.to;
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -59,7 +59,7 @@ class _HomeScreenCardState extends State<HomeScreenCard> {
                   decoration:
                       BoxDecoration(borderRadius: BorderRadius.circular(1000)),
                   child: Image.network(
-                      '${playlistHeaderController.playlist[1].cover}')),
+                      '${playlistHeaderController.playlists[1].cover}')),
               const SizedBox(
                 height: 20,
               ),

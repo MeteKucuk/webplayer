@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:music_player/controller/playlist.dart';
+import 'package:music_player/controller/playlist_controller.dart';
 import 'package:music_player/screens/suggestion_screen/widgets/Suggestion_PlaylistCard.dart';
 import 'package:music_player/widgets/appbar.dart';
 
@@ -11,7 +11,7 @@ class SuggestionScreen extends StatefulWidget {
 }
 
 class _SuggestionScreenState extends State<SuggestionScreen> {
-  final playlistController = CurrentTrackController.to;
+  final playlistController = PlaylistController.to;
   bool isHover = false;
   Offset mousPos = const Offset(0, 0);
 

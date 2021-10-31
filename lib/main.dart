@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:music_player/screens/home.dart';
 
-import 'controller/playlist.dart';
+import 'controller/playlist_controller.dart';
 
 void main() async {
-  Get.put(CurrentTrackController());
+  Get.put(PlaylistController());
   runApp(const MyApp());
   WidgetsFlutterBinding.ensureInitialized();
   if (!kIsWeb &&

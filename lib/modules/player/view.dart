@@ -1,12 +1,13 @@
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:music_player/model/track.dart';
-import 'package:music_player/modules/player/constants/constants.dart';
+
+import '../../model/track.dart';
+import '../../screens/components/blur.dart';
 import 'components/controls.dart';
 import 'components/volume_controller.dart';
+import 'constants/constants.dart';
 import 'controller.dart';
-import '../../screens/components/blur.dart';
 
 class View extends StatefulWidget {
   const View({Key? key, required this.player}) : super(key: key);
@@ -61,7 +62,7 @@ class _ViewState extends State<View> {
                           Container(
                             padding: EdgeInsets.only(
                               right: width * 0.07,
-                              left: 100,
+                              left: width * 0.1,
                               top: 10,
                               bottom: 10,
                             ),
@@ -114,27 +115,34 @@ class _ViewState extends State<View> {
   }
 
   Widget _createTrackTexts(Track track) {
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          track.name ?? "",
-          textAlign: TextAlign.left,
-          style: TextStyle(
-            color: Colors.grey.shade400,
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * 0.1,
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            track.name ?? "",
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              color: Colors.grey.shade400,
+            ),
           ),
-        ),
-        Text(
-          track.artist ?? "",
-          textAlign: TextAlign.left,
-          style: TextStyle(
-            color: Colors.grey.shade500,
-            fontSize: 12,
+          Text(
+            track.artist ?? "",
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              color: Colors.grey.shade500,
+              fontSize: 12,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

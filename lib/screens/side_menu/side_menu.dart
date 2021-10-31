@@ -3,11 +3,11 @@ import 'package:get/get.dart';
 import 'package:music_player/screens/side_menu/widgets/sidemenu_icontab.dart';
 
 import '../../constant.dart';
-import '../../controller/playlist.dart';
+import '../../controller/playlist_controller.dart';
 import '../../data/data.dart';
 
 class SideMenu extends StatelessWidget {
-  final playlistController = CurrentTrackController.to;
+  final playlistController = PlaylistController.to;
 
   SideMenu({Key? key}) : super(key: key);
 
@@ -97,7 +97,7 @@ class SuggestionPlaylist extends StatefulWidget {
 }
 
 class _SuggestionPlaylistState extends State<SuggestionPlaylist> {
-  final playlistController = CurrentTrackController.to;
+  final playlistController = PlaylistController.to;
   ScrollController? _scrollController;
   @override
   void initState() {
@@ -186,8 +186,10 @@ class _SuggestionPlaylistState extends State<SuggestionPlaylist> {
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  ...playlistController.playlist
-                      .map((e) => Obx(() => ListTile(
+                  ...playlistController.playlists
+                      .map(
+                        (e) => Obx(
+                          () => ListTile(
                             dense: true,
                             title: Text(
                               '${e.name}',
@@ -202,13 +204,13 @@ class _SuggestionPlaylistState extends State<SuggestionPlaylist> {
                                       : Colors.grey),
                               overflow: TextOverflow.ellipsis,
                             ),
-                            onTap: () {
+                            onTap: () async {
                               playlistController.selectedPage.value = 5;
-                              playlistController.updatePlaylistId(e);
-                              playlistController.fetchContent();
-                              playlistController.fetchPlaylist();
+                              await playlistController.updateActiveList(e);
                             },
-                          )))
+                          ),
+                        ),
+                      )
                       .toList(),
                 ],
               ),

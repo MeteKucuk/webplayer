@@ -1,7 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:music_player/controller/playlist.dart';
+import 'package:music_player/controller/playlist_controller.dart';
 import 'package:music_player/screens/create_playlist_screen/widgets/edit_playlist.dart';
 
 import '../../../constant.dart';

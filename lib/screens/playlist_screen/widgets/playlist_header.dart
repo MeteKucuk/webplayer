@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../constant.dart';
-import '../../../controller/playlist.dart';
+import '../../../controller/playlist_controller.dart';
+import '../../../model/playlist.dart';
+import '../../../modules/player/player.dart';
 
 class PlayListHeader extends StatelessWidget {
-  final playlistHeaderController = CurrentTrackController.to;
+  final playlistHeaderController = PlaylistController.to;
 
   PlayListHeader({
     Key? key,
@@ -74,7 +76,7 @@ class PlayListHeader extends StatelessWidget {
           const SizedBox(
             height: 12,
           ),
-          const _PlayListButtons(),
+          _PlayListButtons(playlist: playlistHeaderController.active.value),
         ],
       );
     });
@@ -82,15 +84,21 @@ class PlayListHeader extends StatelessWidget {
 }
 
 class _PlayListButtons extends StatelessWidget {
-  const _PlayListButtons({
+  _PlayListButtons({
     Key? key,
+    required this.playlist,
   }) : super(key: key);
+  final Player _player = Player();
+  final Playlist playlist;
+
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            _player.startPlayingList(playlist);
+          },
           child: const Text('Çal'),
           style: TextButton.styleFrom(
             padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 20),

@@ -1,8 +1,9 @@
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import "package:flutter/material.dart";
 import 'package:just_audio/just_audio.dart';
-import 'package:music_player/model/track.dart';
-import 'package:music_player/modules/player/components/control_button.dart';
+
+import '../../../model/track.dart';
+import 'control_button.dart';
 
 class Controls extends StatefulWidget {
   const Controls({
@@ -30,8 +31,10 @@ class _ControlsState extends State<Controls> {
   void didUpdateWidget(covariant Controls oldWidget) {
     if (widget.player.playing) {
       widget.player.playingStream.listen((isPlaying) {
-        setState(() {
-          _playPause = isPlaying ? Icons.pause : Icons.play_arrow;
+        Future.delayed(const Duration(milliseconds: 200), () {
+          setState(() {
+            _playPause = widget.player.playing ? Icons.pause : Icons.play_arrow;
+          });
         });
       });
 
@@ -62,24 +65,18 @@ class _ControlsState extends State<Controls> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ControlButton(
-                  icon: Icons.skip_previous,
-                  disabled: widget.disabled,
-                  callback: () {
-                    //TODO implement player logic
-                  },
-                ),
+                    icon: Icons.skip_previous,
+                    disabled: widget.disabled,
+                    callback: _handlePrevious),
                 ControlButton(
                   icon: _playPause,
                   autoFocus: true,
                   callback: _handlePlayPause,
                 ),
                 ControlButton(
-                  icon: Icons.skip_next,
-                  disabled: widget.disabled,
-                  callback: () {
-                    //TODO implement player logic
-                  },
-                ),
+                    icon: Icons.skip_next,
+                    disabled: widget.disabled,
+                    callback: _handleNext),
               ],
             ),
           ),
@@ -114,6 +111,14 @@ class _ControlsState extends State<Controls> {
         ],
       ),
     );
+  }
+
+  void _handleNext() {
+    widget.player.seekToNext();
+  }
+
+  void _handlePrevious() {
+    widget.player.seekToPrevious();
   }
 
   void _handlePlayPause() {

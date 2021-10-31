@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:music_player/constant.dart';
-import 'package:music_player/controller/playlist.dart';
+import 'package:music_player/controller/playlist_controller.dart';
 import 'package:music_player/screens/home_screen/widgets/home_screen_card.dart';
 import 'package:music_player/widgets/appbar.dart';
 
@@ -16,7 +16,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final ScrollController controller = ScrollController();
-  final playlistController = CurrentTrackController.to;
+  final playlistController = PlaylistController.to;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
                 child: ScrollConfiguration(
                   behavior: MyCustomScrollBehavior(),
                   child: ListView.builder(
-                      itemCount: playlistController.songList.length,
+                      itemCount: playlistController.active.value.tracks.length,
                       scrollDirection: Axis.horizontal,
                       controller: controller,
                       itemBuilder: (BuildContext context, int index) {

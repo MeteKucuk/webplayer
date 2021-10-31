@@ -1,6 +1,7 @@
 import 'package:http/http.dart' as http;
-import 'package:music_player/model/playlist.dart';
-import 'package:music_player/model/track.dart';
+
+import '../model/playlist.dart';
+import '../model/track.dart';
 
 class DataServices {
   static var client = http.Client();
@@ -8,6 +9,7 @@ class DataServices {
   static Future<List<Track>?> fetchPlaylistContent(value) async {
     var response = await client.get(Uri.parse(
         'https://qrcodeapp-be484-default-rtdb.firebaseio.com/$value/.json'));
+
     if (response.statusCode == 200) {
       var jsonString = response.body;
       return trackFromJson(jsonString);
@@ -16,7 +18,7 @@ class DataServices {
     }
   }
 
-  static Future<List<PlayList>?> fetchPlaylist() async {
+  static Future<List<Playlist>?> fetchPlaylist() async {
     var response = await client.get(Uri.parse(
         'https://qrcodeapp-be484-default-rtdb.firebaseio.com/playlists/.json'));
     if (response.statusCode == 200) {
