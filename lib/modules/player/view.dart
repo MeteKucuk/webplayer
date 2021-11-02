@@ -1,6 +1,5 @@
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
-import 'package:just_audio/just_audio.dart';
 
 import '../../model/track.dart';
 import '../../screens/components/blur.dart';
@@ -8,10 +7,11 @@ import 'components/controls.dart';
 import 'components/volume_controller.dart';
 import 'constants/constants.dart';
 import 'controller.dart';
+import 'custom_player/custom_player.dart';
 
 class View extends StatefulWidget {
   const View({Key? key, required this.player}) : super(key: key);
-  final AudioPlayer player;
+  final CustomPlayer player;
 
   @override
   State<View> createState() => _ViewState();

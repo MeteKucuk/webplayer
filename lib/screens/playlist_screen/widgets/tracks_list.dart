@@ -31,8 +31,8 @@ class TracksList extends StatelessWidget {
         else {
           return DataTable(
             columns: const [
-              DataColumn(label: Text('Şarkıcı')),
               DataColumn(label: Text('Şarkı')),
+              DataColumn(label: Text('Şarkıcı')),
               DataColumn(label: Text('Albüm ')),
               DataColumn(label: Icon(Icons.access_time)),
             ],
@@ -40,10 +40,10 @@ class TracksList extends StatelessWidget {
               return DataRow(
                   cells: [
                     DataCell(
-                      Text('${e.artist}'),
+                      Text('${e.name}'),
                     ),
                     DataCell(
-                      Text('${e.name}'),
+                      Text('${e.artist}'),
                     ),
                     DataCell(
                       Text('${e.album}'),

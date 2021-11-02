@@ -1,8 +1,9 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class EditPlaylist extends StatefulWidget {
+  const EditPlaylist({Key? key}) : super(key: key);
+
   @override
   _EditPlaylistState createState() => _EditPlaylistState();
 }
@@ -68,8 +69,8 @@ class _EditPlaylistState extends State<EditPlaylist> {
                               color: const Color(0xff36676b).withOpacity(0.3),
                               spreadRadius: 3,
                               blurRadius: 3,
-                              offset:
-                                  Offset(0, 1), // changes position of shadow
+                              offset: const Offset(
+                                  0, 1), // changes position of shadow
                             ),
                           ],
                         ),
@@ -91,7 +92,6 @@ class _EditPlaylistState extends State<EditPlaylist> {
                               print(file.name);
                               print(file.bytes);
                               print(file.size);
-                              // ignore: avoid_print
                               print(file.extension);
                               print(file.path);
                             }
@@ -132,15 +132,15 @@ class _EditPlaylistState extends State<EditPlaylist> {
                   children: [
                     Row(
                       children: [
-                        Container(
+                        SizedBox(
                           width: 200,
                           child: TextFormField(
                             decoration: InputDecoration(
                               labelText: "Çalma Listesi Adı",
                               fillColor: Colors.white,
                               border: OutlineInputBorder(
-                                borderRadius: new BorderRadius.circular(25.0),
-                                borderSide: new BorderSide(),
+                                borderRadius: BorderRadius.circular(25.0),
+                                borderSide: const BorderSide(),
                               ),
                             ),
                           ),
@@ -152,7 +152,7 @@ class _EditPlaylistState extends State<EditPlaylist> {
                     ),
                     Row(
                       children: [
-                        Container(
+                        SizedBox(
                           width: 200,
                           child: TextFormField(
                             decoration: InputDecoration(
@@ -160,7 +160,8 @@ class _EditPlaylistState extends State<EditPlaylist> {
                               fillColor: Colors.white,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(25.0),
-                                borderSide: BorderSide(color: Colors.teal),
+                                borderSide:
+                                    const BorderSide(color: Colors.teal),
                               ),
                             ),
                           ),
@@ -176,7 +177,7 @@ class _EditPlaylistState extends State<EditPlaylist> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 52),
+                padding: const EdgeInsets.symmetric(horizontal: 52),
                 child: TextButton(
                   onPressed: () {},
                   child: const Text('Kaydet'),

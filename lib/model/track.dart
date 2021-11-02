@@ -21,6 +21,7 @@ class Track {
     this.name,
     this.url,
     this.cover,
+    this.order,
   });
 
   String? album;
@@ -32,6 +33,7 @@ class Track {
   int? id;
   String? name;
   String? url;
+  int? order;
 
   factory Track.fromJson(Map<String, dynamic> json) => Track(
         album: json["album"],
@@ -43,6 +45,7 @@ class Track {
         name: json["name"],
         url: json["url"],
         cover: json["cover"],
+        order: json["order"] ?? 0,
       );
 
   Map<String, dynamic> toJson() => {
@@ -55,5 +58,6 @@ class Track {
         "name": name,
         "url": url,
         "cover": cover,
+        "order": order,
       };
 }

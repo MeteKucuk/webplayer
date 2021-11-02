@@ -1,8 +1,8 @@
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import "package:flutter/material.dart";
-import 'package:just_audio/just_audio.dart';
 
 import '../../../model/track.dart';
+import '../custom_player/custom_player.dart';
 import 'control_button.dart';
 
 class Controls extends StatefulWidget {
@@ -13,7 +13,7 @@ class Controls extends StatefulWidget {
     required this.onPause,
     this.disabled = false,
   }) : super(key: key);
-  final AudioPlayer player;
+  final CustomPlayer player;
   final Track track;
   final bool disabled;
   final VoidCallback onPause;

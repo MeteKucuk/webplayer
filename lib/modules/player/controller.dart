@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
-import 'package:music_player/model/playlist.dart';
-import 'package:music_player/model/track.dart';
+
+import '../../model/playlist.dart';
+import '../../model/track.dart';
 
 class Controller extends GetxController {
   //Player data goes here

@@ -1,7 +1,5 @@
-import 'dart:developer';
-
-import 'package:get/get.dart';
 import 'package:collection/collection.dart';
+import 'package:get/get.dart';
 
 import '../model/playlist.dart';
 import '../model/track.dart';
@@ -32,11 +30,6 @@ class PlaylistController extends GetxController {
       songList.value = songListContent;
 
       //Add content to playlist to use in player module
-      /* active.value.tracks = [
-        ...songListContent,
-        ...songListContent,
-        ...songListContent
-      ]; */
       active.update((val) {
         val!.tracks = songListContent;
       });

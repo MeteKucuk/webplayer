@@ -34,23 +34,23 @@ class _CreatePlaylistState extends State<CreatePlaylist> {
                             begin: Alignment.centerLeft,
                             end: Alignment.centerRight,
                             colors: [
-                          Color(0xff34465D),
-                          Color(0xff36676b).withOpacity(0.1),
+                          const Color(0xff34465D),
+                          const Color(0xff36676b).withOpacity(0.1),
                         ])),
                     height: 60,
                   ),
                   Container(
-                      margin: EdgeInsets.only(left: 20),
+                      margin: const EdgeInsets.only(left: 20),
                       decoration: BoxDecoration(
                           gradient: LinearGradient(
                               begin: Alignment.centerLeft,
                               end: Alignment.centerRight,
                               colors: [
-                            Color(0xff34465D),
-                            Color(0xff36676b).withOpacity(0.1),
+                            const Color(0xff34465D),
+                            const Color(0xff36676b).withOpacity(0.1),
                           ])),
                       height: 250,
-                      child: CreatePlaylistTitle())
+                      child: const CreatePlaylistTitle())
                 ],
               ),
             ),

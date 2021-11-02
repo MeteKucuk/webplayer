@@ -1,10 +1,8 @@
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:music_player/controller/playlist_controller.dart';
-import 'package:music_player/screens/create_playlist_screen/widgets/edit_playlist.dart';
 
 import '../../../constant.dart';
+import 'edit_playlist.dart';
 
 class CreatePlaylistTitle extends StatefulWidget {
   const CreatePlaylistTitle({Key? key}) : super(key: key);
@@ -45,8 +43,8 @@ class _CreatePlaylistTitleState extends State<CreatePlaylistTitle> {
                 onTap: () {
                   Get.defaultDialog(
                       title: '',
-                      backgroundColor: Color(0xff34465D),
-                      content: EditPlaylist());
+                      backgroundColor: const Color(0xff34465D),
+                      content: const EditPlaylist());
                 },
                 child: Container(
                   padding: const EdgeInsets.all(32),
@@ -58,7 +56,8 @@ class _CreatePlaylistTitleState extends State<CreatePlaylistTitle> {
                         color: const Color(0xff36676b).withOpacity(0.3),
                         spreadRadius: 3,
                         blurRadius: 3,
-                        offset: Offset(0, 1), // changes position of shadow
+                        offset:
+                            const Offset(0, 1), // changes position of shadow
                       ),
                     ],
                   ),
