@@ -2,6 +2,7 @@
 
 import 'dart:async';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
@@ -9,13 +10,13 @@ import 'package:just_audio/just_audio.dart';
 import 'package:music_player/model/track.dart';
 
 extension TrackSource on Track {
-  get toSource => kIsWeb
+  get toSource => kIsWeb || Platform.isWindows
       ? AudioSource.uri(Uri.parse(this.url!), tag: this)
       : LockCachingAudioSource(Uri.parse(this.url!), tag: this);
 }
 
 extension TrackListSource on Iterable<Track> {
-  get toSource => kIsWeb
+  get toSource => kIsWeb || Platform.isWindows
       ? this.map((e) => AudioSource.uri(Uri.parse(e.url!), tag: e)).toList()
       : this
           .map((e) => LockCachingAudioSource(Uri.parse(e.url!), tag: e))

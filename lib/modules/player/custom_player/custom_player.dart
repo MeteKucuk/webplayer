@@ -66,6 +66,12 @@ class CustomPlayer extends AudioPlayer {
 
     //Check if playing from currently loaded list
     if (_originalSource?.id == list.id) {
+      if (currentIndex != null &&
+          sequence![currentIndex!].tag.id == list.tracks[index].id) {
+        await seek(Duration.zero);
+        return;
+      }
+
       int sourceIndex = await _locateTrack(list.tracks[index]);
 
       //Jump to track
@@ -170,6 +176,10 @@ class CustomPlayer extends AudioPlayer {
 
   //Order 2 means index 1 is playing, check and add index 0(required index is order - 2 = 0)
   Future<void> _addPreviousSource(int index) async {
+    if (index > sequence!.length - 1 || index < 0) {
+      return;
+    }
+
     int order = audioSource!.sequence[index].tag.order;
 
     //First track playing, do not continue to adding

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:get/get.dart';
 
@@ -36,12 +37,18 @@ class Player {
 
     //Listen index changes and update ui using source tag.
     playbackStream = _customPlayer.currentIndexStream.listen((currentIndex) {
-      bool condition = currentIndex != null &&
-          _customPlayer.audioSource?.sequence[currentIndex].tag != null;
+      if (currentIndex != null &&
+          (currentIndex > _customPlayer.sequence!.length - 1 ||
+              currentIndex < 0)) {
+        return;
+      }
+
+      bool condition =
+          _customPlayer.audioSource?.sequence[currentIndex!].tag != null;
 
       if (condition) {
         _controller.track.value =
-            _customPlayer.audioSource?.sequence[currentIndex].tag;
+            _customPlayer.audioSource?.sequence[currentIndex!].tag;
       }
     });
   }
@@ -63,6 +70,10 @@ class Player {
   }
 
   void startPlayingList(Playlist list) async {
+    if (Platform.isWindows && _customPlayer.playing) {
+      await _customPlayer.pause();
+    }
+
     await _customPlayer.setListSource(list);
     _customPlayer.play();
 
@@ -71,6 +82,14 @@ class Player {
   }
 
   void playFromList(Playlist list, int index) async {
+    if (index == 0) {
+      _controller.track.value = list.tracks[index];
+    }
+
+    /*if (Platform.isWindows && _customPlayer.playing) {
+      await _customPlayer.pause();
+    }*/
+
     await _customPlayer.prepareForPlayingIndex(list, index, _customPlayer.play);
   }
 }
