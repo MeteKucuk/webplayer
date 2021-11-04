@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:get/get.dart';
 
@@ -64,6 +65,11 @@ class Player {
 
   void startPlayingList(Playlist list) async {
     await _customPlayer.setListSource(list);
+
+    if (Platform.isWindows) {
+      _customPlayer.stop();
+    }
+
     _customPlayer.play();
 
     //Update playing track on controller, this causes ui update before play
@@ -72,5 +78,9 @@ class Player {
 
   void playFromList(Playlist list, int index) async {
     await _customPlayer.prepareForPlayingIndex(list, index, _customPlayer.play);
+    //if index is same despite source change just_audio cannot detect source change
+    if (index == 0) {
+      _controller.track.value = list.tracks[index];
+    }
   }
 }
