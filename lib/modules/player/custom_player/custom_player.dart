@@ -83,7 +83,6 @@ class CustomPlayer extends AudioPlayer {
     callback?.call();
 
     late StreamSubscription<bool> playingStatusStream;
-
     playingStatusStream = playingStream.listen((isPlaying) {
       //Release sequence, player is playing and all set!
       sequenceLockStatus.release;

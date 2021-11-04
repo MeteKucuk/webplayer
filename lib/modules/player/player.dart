@@ -75,6 +75,11 @@ class Player {
     }
 
     await _customPlayer.setListSource(list);
+
+    if (Platform.isWindows) {
+      _customPlayer.stop();
+    }
+
     _customPlayer.play();
 
     //Update playing track on controller, this causes ui update before play
@@ -91,5 +96,9 @@ class Player {
     }*/
 
     await _customPlayer.prepareForPlayingIndex(list, index, _customPlayer.play);
+    //if index is same despite source change just_audio cannot detect source change
+    if (index == 0) {
+      _controller.track.value = list.tracks[index];
+    }
   }
 }

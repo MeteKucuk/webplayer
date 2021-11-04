@@ -26,20 +26,6 @@ class _ControlButtonState extends State<ControlButton> {
   Color bottomBorder = Colors.transparent;
   double y = 0;
 
-  _handleHover(PointerEvent event) {
-    setState(() {
-      if (event is PointerEnterEvent) {
-        background = Colors.white.withOpacity(.8);
-        bottomBorder = Colors.white.withOpacity(.9);
-        y = -4;
-      } else {
-        background = Colors.white70;
-        bottomBorder = Colors.transparent;
-        y = 0;
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     String? tip =
@@ -77,5 +63,19 @@ class _ControlButtonState extends State<ControlButton> {
         ),
       ),
     );
+  }
+
+  _handleHover(PointerEvent event) {
+    setState(() {
+      if (event is PointerEnterEvent) {
+        background = Colors.white.withOpacity(.8);
+        bottomBorder = Colors.white.withOpacity(.9);
+        y = -4;
+      } else {
+        background = Colors.white70;
+        bottomBorder = Colors.transparent;
+        y = 0;
+      }
+    });
   }
 }
