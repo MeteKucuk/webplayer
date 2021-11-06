@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 import '../../model/track.dart';
 import '../../screens/components/blur.dart';
@@ -7,11 +9,10 @@ import 'components/controls.dart';
 import 'components/volume_controller.dart';
 import 'constants/constants.dart';
 import 'controller.dart';
-import 'custom_player/custom_player.dart';
 
 class View extends StatefulWidget {
   const View({Key? key, required this.player}) : super(key: key);
-  final CustomPlayer player;
+  final AudioPlayer player;
 
   @override
   State<View> createState() => _ViewState();
@@ -93,11 +94,12 @@ class _ViewState extends State<View> {
                 Container(
                   alignment: Alignment.topLeft,
                   padding: const EdgeInsets.only(left: 20),
-                  child: CircleAvatar(
-                    radius: 35,
-                    foregroundImage: NetworkImage(track.cover ?? defaultCover),
-                    backgroundImage: const NetworkImage(defaultCover),
-                    backgroundColor: Colors.transparent,
+                  width: MediaQuery.of(context).size.width * 0.09,
+                  child: ClipOval(
+                    child: FadeInImage.memoryNetwork(
+                      placeholder: kTransparentImage,
+                      image: track.cover ?? defaultCover,
+                    ),
                   ),
                 ),
               ],

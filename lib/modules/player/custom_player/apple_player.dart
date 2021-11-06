@@ -8,26 +8,29 @@ import 'package:just_audio/just_audio.dart';
 import '../../../model/playlist.dart';
 import '../../../model/track.dart';
 import "../utils/extensions.dart";
+import 'player_interface.dart';
 
-class CustomPlayer extends AudioPlayer {
-  static final CustomPlayer _customPlayer = CustomPlayer._init();
-  CustomPlayer._init();
-  factory CustomPlayer() => _customPlayer;
+class ApplePlayer extends AudioPlayer implements CustomPlayer {
+  static final ApplePlayer _customPlayer = ApplePlayer._init();
+  ApplePlayer._init();
+  factory ApplePlayer() => _customPlayer;
 
-  Playlist? _originalSource;
+  @override
+  Playlist? listSource;
+
   ConcatenatingAudioSource? _concatedSource;
   StreamSubscription? _sequenceStateStream;
   ValueNotifier<bool> sequenceLockStatus = ValueNotifier(false);
 
+  @override
   Future<void> setListSource(Playlist list, [int startIndex = 0]) async {
     //If user press play button for same playlist start playing first song.
     //Do not change sequence.
-    if (list.id == _originalSource?.id) {
+    if (list.id == listSource?.id) {
       //Replace original source with new one with more track.
       //This step is required for lazy loaded playlist from ui.
-      _originalSource = _originalSource!.tracks.length != list.tracks.length
-          ? list
-          : _originalSource;
+      listSource =
+          listSource!.tracks.length != list.tracks.length ? list : listSource;
 
       await _locateTrack(list.tracks[0]);
       seek(Duration.zero, index: 0);
@@ -35,7 +38,7 @@ class CustomPlayer extends AudioPlayer {
     }
 
     //Keep original sources
-    _originalSource = list;
+    listSource = list;
 
     if (list.tracks.length > 3) {
       int lastIndex = math.min(startIndex + 3, list.tracks.length);
@@ -59,13 +62,14 @@ class CustomPlayer extends AudioPlayer {
     }
   }
 
-  Future<void> prepareForPlayingIndex(Playlist list, int index,
+  @override
+  Future<void> playByIndex(Playlist list, int index,
       [Callback? callback]) async {
     //Lock sequence for adding new sources until player starts playing
     sequenceLockStatus.lock;
 
     //Check if playing from currently loaded list
-    if (_originalSource?.id == list.id) {
+    if (listSource?.id == list.id) {
       if (currentIndex != null &&
           sequence![currentIndex!].tag.id == list.tracks[index].id) {
         await seek(Duration.zero);
@@ -136,7 +140,7 @@ class CustomPlayer extends AudioPlayer {
   ///Add tracks to sequence when needed. This method supplies lazy loading feature to player.
   _handleSequence() {
     currentIndexStream.listen((index) async {
-      if (_originalSource == null || index == null) return;
+      if (listSource == null || index == null) return;
 
       //Player will play specific index, wait to start playing if required
       await sequenceLockStatus.waitUnlock;
@@ -157,15 +161,15 @@ class CustomPlayer extends AudioPlayer {
 
     int order = audioSource!.sequence[index].tag.order;
     //Last track playing, do not continue adding
-    if (order >= _originalSource!.tracks.length) return false;
+    if (order >= listSource!.tracks.length) return false;
 
-    bool containsNext = audioSource?.sequence.any(
-            (source) => source.tag.id == _originalSource!.tracks[order].id) ??
+    bool containsNext = audioSource?.sequence
+            .any((source) => source.tag.id == listSource!.tracks[order].id) ??
         true;
 
     if (!containsNext) {
       await _concatedSource!
-          .insert(index + 1, _originalSource!.tracks[order].toSource);
+          .insert(index + 1, listSource!.tracks[order].toSource);
 
       return true;
     }
@@ -184,13 +188,13 @@ class CustomPlayer extends AudioPlayer {
     //First track playing, do not continue to adding
     if (order <= 1) return;
 
-    bool containsPrevious = audioSource?.sequence.any((source) =>
-            source.tag.id == _originalSource!.tracks[order - 2].id) ??
+    bool containsPrevious = audioSource?.sequence.any(
+            (source) => source.tag.id == listSource!.tracks[order - 2].id) ??
         true;
 
     if (!containsPrevious) {
       await _concatedSource!
-          .insert(index, _originalSource!.tracks[order - 2].toSource);
+          .insert(index, listSource!.tracks[order - 2].toSource);
     }
 
     return;
