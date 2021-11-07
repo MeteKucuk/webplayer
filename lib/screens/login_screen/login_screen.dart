@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import 'package:music_player/screens/components/blur.dart';
+import '../components/blur.dart';
 
 import 'widgets/login_form.dart';
 

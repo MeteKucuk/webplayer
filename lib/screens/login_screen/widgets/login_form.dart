@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
-import 'package:music_player/screens/login_screen/widgets/login_elevatated_button.dart';
-import 'package:music_player/screens/login_screen/widgets/login_text_formfield.dart';
+import 'login_elevatated_button.dart';
+import 'login_text_formfield.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({Key? key}) : super(key: key);

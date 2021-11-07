@@ -2,10 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:music_player/constant.dart';
-import 'package:music_player/controller/playlist_controller.dart';
-import 'package:music_player/screens/home_screen/widgets/home_screen_card.dart';
-import 'package:music_player/widgets/appbar.dart';
+import '../../constant.dart';
+import '../../controller/playlist_controller.dart';
+import 'widgets/home_screen_card.dart';
+import '../../widgets/appbar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

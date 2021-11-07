@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:music_player/controller/playlist_controller.dart';
-import 'package:music_player/screens/suggestion_screen/widgets/Suggestion_PlaylistCard.dart';
-import 'package:music_player/widgets/appbar.dart';
+import '../../controller/playlist_controller.dart';
+import 'widgets/Suggestion_PlaylistCard.dart';
+import '../../widgets/appbar.dart';
 
 class SuggestionScreen extends StatefulWidget {
   const SuggestionScreen({Key? key}) : super(key: key);

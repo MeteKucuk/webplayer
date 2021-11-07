@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'widgets/create_playlist_title.dart';
-import 'package:music_player/widgets/appbar.dart';
+import '../../widgets/appbar.dart';
 
 class CreatePlaylist extends StatefulWidget {
   const CreatePlaylist({Key? key}) : super(key: key);

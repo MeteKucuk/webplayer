@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:just_audio/just_audio.dart';
-import 'package:music_player/model/playlist.dart';
-import 'package:music_player/model/track.dart';
-import 'package:music_player/modules/player/custom_player/player_interface.dart';
+import '../../../model/playlist.dart';
+import '../../../model/track.dart';
+import 'player_interface.dart';
 import "../utils/extensions.dart";
 
 ///Windows, web and android player implemetation

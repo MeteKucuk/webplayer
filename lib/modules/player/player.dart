@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 import '../../model/playlist.dart';
@@ -8,6 +7,7 @@ import 'controller.dart';
 import 'custom_player/apple_player.dart';
 import 'custom_player/common_player.dart';
 import 'custom_player/player_interface.dart';
+import 'custom_player/windows_player.dart';
 import 'service/data.dart';
 import 'view.dart';
 
@@ -25,9 +25,7 @@ class Player {
   Player._init() {
     _controller = Get.put(Controller());
 
-    //Assign player according to host platform
-    _customPlayer =
-        (Platform.isIOS || Platform.isMacOS) ? ApplePlayer() : CommonPlayer();
+    _customPlayer = _getPlayer();
 
     //Create player view
     _view = View(player: _customPlayer);
@@ -67,5 +65,25 @@ class Player {
 
     //if index is same despite source change just_audio cannot detect source change
     _controller.track.value = list.tracks[index];
+  }
+
+  ///Returns player according to the host platform
+  CustomPlayer _getPlayer() {
+    CustomPlayer _player;
+
+    if (!kIsWeb) {
+      if (defaultTargetPlatform == TargetPlatform.iOS ||
+          defaultTargetPlatform == TargetPlatform.macOS) {
+        _player = ApplePlayer();
+      } else if (defaultTargetPlatform == TargetPlatform.windows) {
+        _player = WindowsPlayer();
+      } else {
+        _player = CommonPlayer();
+      }
+    } else {
+      _player = CommonPlayer();
+    }
+
+    return _player;
   }
 }

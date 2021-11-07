@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:just_audio/just_audio.dart';
-import 'package:music_player/modules/player/components/control_button.dart';
+import 'control_button.dart';
 
 class VolumeController extends StatefulWidget {
   const VolumeController({

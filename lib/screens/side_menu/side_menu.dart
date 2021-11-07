@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:music_player/screens/side_menu/widgets/sidemenu_icontab.dart';
+import 'widgets/sidemenu_icontab.dart';
 
 import '../../constant.dart';
 import '../../controller/playlist_controller.dart';

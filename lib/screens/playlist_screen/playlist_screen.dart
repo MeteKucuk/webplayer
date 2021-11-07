@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:music_player/widgets/appbar.dart';
+import '../../widgets/appbar.dart';
 
 import 'widgets/playlist_header.dart';
 import 'widgets/tracks_list.dart';

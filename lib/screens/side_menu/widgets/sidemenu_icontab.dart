@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:music_player/controller/playlist_controller.dart';
+import '../../../controller/playlist_controller.dart';
 
 class SideMenuIconTab extends StatelessWidget {
   final playlistController = PlaylistController.to;
