@@ -29,7 +29,8 @@ class CommonPlayer extends AudioPlayer implements CustomPlayer {
   }
 
   @override
-  Future<void> setListSource(Playlist list, [int startIndex = 0]) async {
+  Future<void> setListSource(Playlist list,
+      {int startIndex = 0, FutureOr<dynamic> Function()? callback}) async {
     if (listSource?.id == list.id) {
       seek(Duration.zero, index: 0);
       return;
@@ -53,6 +54,10 @@ class CommonPlayer extends AudioPlayer implements CustomPlayer {
     await load();
     await seek(Duration.zero, index: index);
   }
+
+  @override
+  // TODO: implement trackStream
+  Stream<Track> get trackStream => throw UnimplementedError();
 }
 
 typedef Callback = FutureOr Function();

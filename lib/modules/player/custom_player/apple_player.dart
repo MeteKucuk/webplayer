@@ -18,12 +18,17 @@ class ApplePlayer extends AudioPlayer implements CustomPlayer {
   @override
   Playlist? listSource;
 
+  final StreamController<Track> _trackController = StreamController();
+  @override
+  get trackStream => _trackController.stream;
+
   ConcatenatingAudioSource? _concatedSource;
   StreamSubscription? _sequenceStateStream;
   ValueNotifier<bool> sequenceLockStatus = ValueNotifier(false);
 
   @override
-  Future<void> setListSource(Playlist list, [int startIndex = 0]) async {
+  Future<void> setListSource(Playlist list,
+      {int startIndex = 0, FutureOr<dynamic> Function()? callback}) async {
     //If user press play button for same playlist start playing first song.
     //Do not change sequence.
     if (list.id == listSource?.id) {
@@ -81,7 +86,7 @@ class ApplePlayer extends AudioPlayer implements CustomPlayer {
       //Jump to track
       await seek(Duration.zero, index: sourceIndex);
     } else {
-      await setListSource(list, index);
+      await setListSource(list, startIndex: index);
     }
 
     callback?.call();

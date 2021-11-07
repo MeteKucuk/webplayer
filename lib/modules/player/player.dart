@@ -1,4 +1,5 @@
-import 'package:flutter/foundation.dart';
+import 'dart:io';
+
 import 'package:get/get.dart';
 
 import '../../model/playlist.dart';
@@ -20,17 +21,13 @@ class Player {
   late View _view;
   late CustomPlayer _customPlayer;
   late Controller _controller;
-  int _previousIndex = 0;
 
   Player._init() {
     _controller = Get.put(Controller());
 
     //Assign player according to host platform
-    _customPlayer = !kIsWeb &&
-            ((defaultTargetPlatform == TargetPlatform.macOS ||
-                defaultTargetPlatform == TargetPlatform.iOS))
-        ? ApplePlayer()
-        : CommonPlayer();
+    _customPlayer =
+        (Platform.isIOS || Platform.isMacOS) ? ApplePlayer() : CommonPlayer();
 
     //Create player view
     _view = View(player: _customPlayer);
@@ -41,17 +38,8 @@ class Player {
     });
 
     //Listen index changes and update ui using source tag.
-    _customPlayer.sequenceStateStream.listen((state) {
-      if (state == null ||
-          state.currentSource == null ||
-          state.currentSource!.tag == null) {
-        return;
-      }
-
-      if ((state.currentIndex - _previousIndex).abs() == 1) {
-        _controller.track.value = state.currentSource!.tag;
-        _previousIndex = state.currentIndex;
-      }
+    _customPlayer.trackStream.listen((track) {
+      _controller.track.value = track;
     });
   }
 
@@ -68,16 +56,13 @@ class Player {
   }
 
   void startPlayingList(Playlist list) async {
-    await _customPlayer.setListSource(list);
-
-    _customPlayer.play();
+    await _customPlayer.setListSource(list, callback: _customPlayer.play);
 
     //Update playing track on controller, this causes ui update
     _controller.track.value = list.tracks.first;
   }
 
   void playFromList(Playlist list, int index) async {
-    _previousIndex = index;
     await _customPlayer.playByIndex(list, index, _customPlayer.play);
 
     //if index is same despite source change just_audio cannot detect source change
