@@ -3,7 +3,6 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 
 import '../controller/playlist_controller.dart';
 import '../modules/player/player.dart';
-import 'create_playlist_screen/create_playlist_screen.dart';
 import 'home_screen/home_screen.dart';
 import 'playlist_screen/playlist_screen.dart';
 import 'side_menu/side_menu.dart';

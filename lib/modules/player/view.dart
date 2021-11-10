@@ -58,7 +58,7 @@ class _ViewState extends State<View> {
                           Blur(
                             width: width,
                             height: MediaQuery.of(context).size.height,
-                            color: Colors.black.withOpacity(0.5),
+                            color: Colors.white.withOpacity(0.1),
                           ),
                           Container(
                             padding: EdgeInsets.only(

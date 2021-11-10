@@ -27,7 +27,6 @@ class DataServices {
         'https://qrcodeapp-be484-default-rtdb.firebaseio.com/playlists/.json'));
     if (response.statusCode == 200) {
       var jsonString = response.body;
-      print(jsonString);
 
       return playListFromJson(jsonString);
     } else {
@@ -45,16 +44,12 @@ class DataServices {
     }
     allPlaylist.add(data);
     var map = jsonEncode(allPlaylist);
-    print(map);
     http.Response response = await http.put(
         Uri.parse(
             "https://qrcodeapp-be484-default-rtdb.firebaseio.com/playlists/.json"),
         body: map);
 
     if (response.statusCode == 201) {
-      print(" created");
-    } else {
-      print(response.statusCode);
-    }
+    } else {}
   }
 }

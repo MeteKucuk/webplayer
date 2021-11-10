@@ -31,8 +31,8 @@ class _PlayListScreenState extends State<PlayListScreen> {
       appBar: appBar(),
       body: Container(
         width: double.infinity,
-        decoration: const BoxDecoration(
-          color: Color(0xff34465D),
+        decoration: BoxDecoration(
+          color: Colors.black54,
         ),
         child: Scrollbar(
           isAlwaysShown: true,
@@ -40,7 +40,7 @@ class _PlayListScreenState extends State<PlayListScreen> {
           child: ListView(
             controller: _scrollController,
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20.0),
-            children: [PlayListHeader(), TracksList()],
+            children: [PlayListHeader(), const TracksList()],
           ),
         ),
       ),

@@ -1,15 +1,15 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:music_player/screens/playlist_screen/widgets/playlistLoader.dart';
-import 'package:music_player/screens/playlist_screen/widgets/playlist_emptyscreen.dart';
+import 'package:music_player/model/track.dart';
 
 import '../../../controller/playlist_controller.dart';
 import '../../../modules/player/player.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'playlistLoader.dart';
+import 'playlist_emptyscreen.dart';
 
 class TracksList extends StatefulWidget {
-  TracksList({Key? key}) : super(key: key);
+  const TracksList({Key? key}) : super(key: key);
 
   @override
   State<TracksList> createState() => _TracksListState();
@@ -28,50 +28,103 @@ class _TracksListState extends State<TracksList> {
         var active = _controller.active.value;
 
         if (active.tracks.isEmpty && active.length != 0) {
-          //Loading ekranını döndür
           return const PlaylistLoader();
-        }
-        // active.length == 0 ? şarkı içermeyen playlistler için oluşturduğun ekranı döndür.
-        else if (active.length == 0) {
-          return PlaylistEmptyScreen();
+        } else if (active.length == 0) {
+          return const PlaylistEmptyScreen();
         } else {
-          return DataTable(
-            columns: const [
-              DataColumn(label: Text('Şarkı')),
-              DataColumn(label: Text('Şarkıcı')),
-              DataColumn(label: Text('Albüm ')),
-              DataColumn(label: Icon(Icons.access_time)),
+          return Column(
+            children: [
+              _createTrackListHeader(),
+              SingleChildScrollView(
+                child: Column(
+                  children: _createTrackRow(active.tracks),
+                ),
+              ),
             ],
-            rows: active.tracks.mapIndexed((i, e) {
-              return DataRow(
-                  cells: [
-                    DataCell(Row(
-                      children: [
-                        Icon(Icons.play_arrow_sharp),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Text('${e.name}'),
-                      ],
-                    )),
-                    DataCell(
-                      Text('${e.artist}'),
-                    ),
-                    DataCell(
-                      Text('${e.album}'),
-                    ),
-                    DataCell(
-                      Text(_controller.trackDurationCover(e.duration!)),
-                    ),
-                  ],
-                  onSelectChanged: (selected) {
-                    _player.playFromList(active, i);
-                  });
-            }).toList(),
-            showCheckboxColumn: false,
           );
         }
       },
     );
+  }
+
+  Widget _createTrackListHeader() {
+    return Material(
+      elevation: 10,
+      color: const Color(0xff171717),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4),
+        child: Flex(
+          direction: Axis.horizontal,
+          children: const [
+            Spacer(),
+            Expanded(
+              child: Text("Şarkı"),
+            ),
+            Expanded(
+              child: Text("Şarkıcı"),
+            ),
+            Expanded(
+              child: Text("Albüm"),
+            ),
+            Expanded(
+              child: Text("Süre"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  List<Widget> _createTrackRow(List<Track> tracks) {
+    List<Widget> trackRows = [];
+
+    for (var track in tracks) {
+      trackRows.add(
+        GestureDetector(
+          onTap: () {
+            _player.playFromList(_controller.active.value, track.order! - 1);
+          },
+          child: Container(
+            margin: const EdgeInsets.only(top: 10),
+            height: MediaQuery.of(context).size.height * 0.07,
+            child: Material(
+              elevation: 20,
+              color: const Color(0xff171717).withOpacity(.9),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4),
+                child: Flex(
+                  direction: Axis.horizontal,
+                  children: [
+                    const Spacer(),
+                    Expanded(
+                      child: Text(track.name!),
+                    ),
+                    Expanded(
+                      child: Text(track.artist!),
+                    ),
+                    Expanded(
+                      child: Text(track.album!),
+                    ),
+                    Expanded(
+                      child: Text(track.duration!.toString()),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
+    trackRows.add(const SizedBox(
+      height: 80,
+    ));
+
+    return trackRows;
   }
 }

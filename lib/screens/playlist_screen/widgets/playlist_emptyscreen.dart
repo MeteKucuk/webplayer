@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class PlaylistEmptyScreen extends StatefulWidget {
+  const PlaylistEmptyScreen({Key? key}) : super(key: key);
+
   @override
   _PlaylistEmptyScreenState createState() => _PlaylistEmptyScreenState();
 }
@@ -9,7 +11,7 @@ class _PlaylistEmptyScreenState extends State<PlaylistEmptyScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 15),
+      margin: const EdgeInsets.symmetric(vertical: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -25,7 +27,7 @@ class _PlaylistEmptyScreenState extends State<PlaylistEmptyScreen> {
               Container(
                 width: 500,
                 height: 40,
-                color: Color(0xff36676b).withOpacity(0.4),
+                color: const Color(0xff36676b).withOpacity(0.4),
                 child: Row(
                   children: const [
                     Padding(

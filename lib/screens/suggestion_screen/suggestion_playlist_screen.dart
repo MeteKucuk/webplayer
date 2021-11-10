@@ -19,7 +19,6 @@ class _SuggestionScreenState extends State<SuggestionScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     _scrollController = ScrollController(initialScrollOffset: 50.0);
 
     super.initState();
@@ -28,7 +27,6 @@ class _SuggestionScreenState extends State<SuggestionScreen> {
   @override
   void dispose() {
     _scrollController?.dispose();
-    // TODO: implement dispose
     super.dispose();
   }
 
@@ -60,20 +58,17 @@ class _SuggestionScreenState extends State<SuggestionScreen> {
                   height: 15,
                 ),
                 Expanded(
-                  child: Container(
-                    child: GridView.builder(
-                      itemCount: playlistController.songList.length,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-
-                              // ignore: dead_code
-                              crossAxisCount: 4,
-                              childAspectRatio: 0.8,
-                              mainAxisSpacing: 3,
-                              crossAxisSpacing: 5),
-                      itemBuilder: (context, index) => SuggestionPlaylist_Card(
-                        title: '${playlistController.songList[index].name}  ',
-                      ),
+                  child: GridView.builder(
+                    itemCount: playlistController.songList.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 4,
+                      childAspectRatio: 0.8,
+                      mainAxisSpacing: 3,
+                      crossAxisSpacing: 5,
+                    ),
+                    itemBuilder: (context, index) => SuggestionPlaylist_Card(
+                      title: '${playlistController.songList[index].name}  ',
                     ),
                   ),
                 ),
