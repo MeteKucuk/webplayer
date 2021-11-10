@@ -39,7 +39,7 @@ class _PlayListScreenState extends State<PlayListScreen> {
           controller: _scrollController,
           child: ListView(
             controller: _scrollController,
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 60.0),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20.0),
             children: [PlayListHeader(), TracksList()],
           ),
         ),

@@ -48,7 +48,6 @@ class Playlist {
         "length": length,
         "name": name,
         "owner": owner?.toJson(),
-        "tracks": trackToJson(tracks),
       };
 }
 

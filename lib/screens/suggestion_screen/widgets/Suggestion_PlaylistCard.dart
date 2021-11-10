@@ -44,9 +44,10 @@ class _SuggestionPlaylist_CardState extends State<SuggestionPlaylist_Card> {
           });
         },
         child: Container(
-          width: 120,
-          height: 200,
+          margin: const EdgeInsets.symmetric(horizontal: 20),
           padding: const EdgeInsets.all(20),
+          height: 220,
+          width: 150,
           decoration: BoxDecoration(
               gradient: isHover
                   ? const LinearGradient(
@@ -58,7 +59,7 @@ class _SuggestionPlaylist_CardState extends State<SuggestionPlaylist_Card> {
                       begin: Alignment.bottomCenter,
                       end: Alignment.topCenter,
                       colors: [Color(0xff34465D), Color(0xff36676b)],
-                      stops: [0.1, 1]),
+                      stops: [0.01, 1]),
               borderRadius: BorderRadius.circular(16)),
           child: Column(children: [
             Image.network('${playlistHeaderController.playlists[1].cover}'),
@@ -71,7 +72,7 @@ class _SuggestionPlaylist_CardState extends State<SuggestionPlaylist_Card> {
                 style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: 20,
+                  fontSize: 17,
                 ),
               ),
             ),

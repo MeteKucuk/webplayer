@@ -20,11 +20,13 @@ class Home extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          Row(
-            children: <Widget>[
-              SideMenu(),
-              Obx(() => _buildChild()),
-            ],
+          Obx(
+            () => Row(
+              children: <Widget>[
+                SideMenu(),
+                _buildChild(),
+              ],
+            ),
           ),
           Align(
             alignment: Alignment.bottomCenter,
@@ -44,8 +46,6 @@ class Home extends StatelessWidget {
       return const Expanded(child: SuggestionScreen());
     } else if (playlistController.selectedPage.value == 0) {
       return const Expanded(child: HomePage());
-    } else if (playlistController.selectedPage.value == 2) {
-      return const Expanded(child: CreatePlaylist());
     } else {
       return const CircularProgressIndicator();
     }

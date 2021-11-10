@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:music_player/services/data_service.dart';
 import 'widgets/sidemenu_icontab.dart';
 
 import '../../constant.dart';
@@ -8,6 +9,15 @@ import '../../data/data.dart';
 
 class SideMenu extends StatelessWidget {
   final playlistController = PlaylistController.to;
+  final dataTest = {
+    "cover":
+        "https://i.picsum.photos/id/893/200/200.jpg?hmac=MKUqbcyRrvAYoTmgHo74fEI3o9V4CH2kBrvWfmHkr7U",
+    "duration": 75.7,
+    "length": 0,
+    "id": 6,
+    "name": "NewONe",
+    "owner": {"id": 123541235, "username": "Mete"}
+  };
 
   SideMenu({Key? key}) : super(key: key);
 
@@ -72,6 +82,11 @@ class SideMenu extends StatelessWidget {
                   ? Constant.bodySelectedText
                   : Constant.bodyText1,
               onTap: () {
+                Future.delayed(const Duration(seconds: 1), () {
+                  playlistController.fetchPlaylist();
+                });
+
+                DataServices.postData(dataTest);
                 playlistController.selectedPage.value = 2;
               },
               title: yourLibrary[2],
@@ -82,21 +97,21 @@ class SideMenu extends StatelessWidget {
             height: 12.0,
           ),
 
-          const SuggestionPlaylist(),
+          const LibraryAndPlaylists(),
         ],
       ),
     );
   }
 }
 
-class SuggestionPlaylist extends StatefulWidget {
-  const SuggestionPlaylist({Key? key}) : super(key: key);
+class LibraryAndPlaylists extends StatefulWidget {
+  const LibraryAndPlaylists({Key? key}) : super(key: key);
 
   @override
-  _SuggestionPlaylistState createState() => _SuggestionPlaylistState();
+  _LibraryAndPlaylistsState createState() => _LibraryAndPlaylistsState();
 }
 
-class _SuggestionPlaylistState extends State<SuggestionPlaylist> {
+class _LibraryAndPlaylistsState extends State<LibraryAndPlaylists> {
   final playlistController = PlaylistController.to;
   ScrollController? _scrollController;
   @override

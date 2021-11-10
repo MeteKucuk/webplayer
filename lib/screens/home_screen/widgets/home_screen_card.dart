@@ -52,7 +52,7 @@ class _HomeScreenCardState extends State<HomeScreenCard> {
                         begin: Alignment.bottomCenter,
                         end: Alignment.topCenter,
                         colors: [Color(0xff34465D), Color(0xff36676b)],
-                        stops: [0.1, 1]),
+                        stops: [0.01, 1]),
                 borderRadius: BorderRadius.circular(16)),
             child: Column(children: [
               Container(

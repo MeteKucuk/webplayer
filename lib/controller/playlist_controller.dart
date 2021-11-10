@@ -53,12 +53,21 @@ class PlaylistController extends GetxController {
     fetchContent(list.id!);
   }
 
-  String durationCover(double? hour) {
+  String playlistDurationCover(double? hour) {
     int num = hour!.truncate();
     double decimal = hour - num;
     int minute = (decimal * 60).round();
 
     return "$num saat $minute dakika";
+  }
+
+  String trackDurationCover(int seconds) {
+    int minutes = (seconds / 60).truncate();
+
+    String minutesCover = (minutes).toString();
+    String secondsCover = (seconds % 60).toString().padLeft(2, '0');
+
+    return "$minutesCover:$secondsCover";
   }
 
   @override

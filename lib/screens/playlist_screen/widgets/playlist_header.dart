@@ -21,8 +21,8 @@ class PlayListHeader extends StatelessWidget {
             children: [
               Image.network(
                 '${playlistHeaderController.active.value.cover}',
-                height: 200,
-                width: 200.0,
+                height: 190,
+                width: 190.0,
                 fit: BoxFit.cover,
               ),
               const SizedBox(
@@ -63,7 +63,7 @@ class PlayListHeader extends StatelessWidget {
                         style: Constant.bodyText1,
                       ),
                       Text(
-                        playlistHeaderController.durationCover(
+                        playlistHeaderController.playlistDurationCover(
                             playlistHeaderController.active.value.duration),
                         style: Constant.bodyText1,
                       ),

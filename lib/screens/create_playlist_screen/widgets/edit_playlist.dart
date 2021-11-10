@@ -88,12 +88,6 @@ class _EditPlaylistState extends State<EditPlaylist> {
                             );
                             if (result != null) {
                               PlatformFile? file = result.files.first;
-
-                              print(file.name);
-                              print(file.bytes);
-                              print(file.size);
-                              print(file.extension);
-                              print(file.path);
                             }
                             if (result == null) {
                               return;

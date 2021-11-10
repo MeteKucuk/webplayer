@@ -16,169 +16,201 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final ScrollController controller = ScrollController();
+  ScrollController? _scrollController;
   final playlistController = PlaylistController.to;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _scrollController = ScrollController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollController?.dispose();
+    controller.dispose();
+    // TODO: implement dispose
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          width: double.infinity,
-          decoration: const BoxDecoration(
-            color: Color(0xff34465D),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'POP',
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+      body: Container(
+        child: Scrollbar(
+          controller: _scrollController,
+          isAlwaysShown: true,
+          child: SingleChildScrollView(
+            controller: _scrollController,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                color: Color(0xff34465D),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'POP',
+                        style: TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.bold),
+                      ),
+                      TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            'Hepsini Gör',
+                            style: Constant.bodySelectedText,
+                          )),
+                    ],
                   ),
-                  TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        'Hepsini Gör',
-                        style: Constant.bodySelectedText,
-                      )),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    height: 200.0,
+                    alignment: Alignment.center,
+                    child: ScrollConfiguration(
+                      behavior: MyCustomScrollBehavior(),
+                      child: ListView.builder(
+                          itemCount: playlistController.songList.value.length,
+                          scrollDirection: Axis.horizontal,
+                          controller: controller,
+                          itemBuilder: (BuildContext context, int index) {
+                            return HomeScreenCard(
+                              title:
+                                  '${playlistController.songList[index].name}  ',
+                            );
+                          }),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'POP',
+                        style: TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.bold),
+                      ),
+                      TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            'Hepsini Gör',
+                            style: Constant.bodySelectedText,
+                          )),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    // Another fixed-height child.
+                    // Green
+                    height: 200.0,
+                    alignment: Alignment.center,
+                    child: ScrollConfiguration(
+                      behavior: MyCustomScrollBehavior(),
+                      child: ListView.builder(
+                          itemCount: playlistController.songList.length,
+                          scrollDirection: Axis.horizontal,
+                          controller: controller,
+                          itemBuilder: (BuildContext context, int index) {
+                            return HomeScreenCard(
+                              title:
+                                  '${playlistController.songList[index].name}  ',
+                            );
+                          }),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'POP',
+                        style: TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.bold),
+                      ),
+                      TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            'Hepsini Gör',
+                            style: Constant.bodySelectedText,
+                          )),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    // Another fixed-height child.
+                    // Green
+                    height: 200.0,
+                    alignment: Alignment.center,
+                    child: ScrollConfiguration(
+                      behavior: MyCustomScrollBehavior(),
+                      child: ListView.builder(
+                          itemCount: playlistController.songList.length,
+                          scrollDirection: Axis.horizontal,
+                          controller: controller,
+                          itemBuilder: (BuildContext context, int index) {
+                            return HomeScreenCard(
+                              title:
+                                  '${playlistController.songList[index].name}  ',
+                            );
+                          }),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'POP',
+                        style: TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.bold),
+                      ),
+                      TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            'Hepsini Gör',
+                            style: Constant.bodySelectedText,
+                          )),
+                    ],
+                  ),
+                  Container(
+                    // Another fixed-height child.
+                    // Green
+                    height: 200.0,
+                    alignment: Alignment.center,
+                    child: ScrollConfiguration(
+                      behavior: MyCustomScrollBehavior(),
+                      child: ListView.builder(
+                          itemCount: playlistController.songList.length,
+                          scrollDirection: Axis.horizontal,
+                          controller: controller,
+                          itemBuilder: (BuildContext context, int index) {
+                            return HomeScreenCard(
+                              title:
+                                  '${playlistController.songList[index].name}  ',
+                            );
+                          }),
+                    ),
+                  ),
                 ],
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                height: 200.0,
-                alignment: Alignment.center,
-                child: ScrollConfiguration(
-                  behavior: MyCustomScrollBehavior(),
-                  child: ListView.builder(
-                      itemCount: playlistController.active.value.tracks.length,
-                      scrollDirection: Axis.horizontal,
-                      controller: controller,
-                      itemBuilder: (BuildContext context, int index) {
-                        return HomeScreenCard(
-                          title: '${playlistController.songList[index].name}  ',
-                        );
-                      }),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'POP',
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                  ),
-                  TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        'Hepsini Gör',
-                        style: Constant.bodySelectedText,
-                      )),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                // Another fixed-height child.
-                // Green
-                height: 200.0,
-                alignment: Alignment.center,
-                child: ScrollConfiguration(
-                  behavior: MyCustomScrollBehavior(),
-                  child: ListView.builder(
-                      itemCount: playlistController.songList.length,
-                      scrollDirection: Axis.horizontal,
-                      controller: controller,
-                      itemBuilder: (BuildContext context, int index) {
-                        return HomeScreenCard(
-                          title: '${playlistController.songList[index].name}  ',
-                        );
-                      }),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'POP',
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                  ),
-                  TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        'Hepsini Gör',
-                        style: Constant.bodySelectedText,
-                      )),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                // Another fixed-height child.
-                // Green
-                height: 200.0,
-                alignment: Alignment.center,
-                child: ScrollConfiguration(
-                  behavior: MyCustomScrollBehavior(),
-                  child: ListView.builder(
-                      itemCount: playlistController.songList.length,
-                      scrollDirection: Axis.horizontal,
-                      controller: controller,
-                      itemBuilder: (BuildContext context, int index) {
-                        return HomeScreenCard(
-                          title: '${playlistController.songList[index].name}  ',
-                        );
-                      }),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'POP',
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                  ),
-                  TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        'Hepsini Gör',
-                        style: Constant.bodySelectedText,
-                      )),
-                ],
-              ),
-              Container(
-                // Another fixed-height child.
-                // Green
-                height: 200.0,
-                alignment: Alignment.center,
-                child: ScrollConfiguration(
-                  behavior: MyCustomScrollBehavior(),
-                  child: ListView.builder(
-                      itemCount: playlistController.songList.length,
-                      scrollDirection: Axis.horizontal,
-                      controller: controller,
-                      itemBuilder: (BuildContext context, int index) {
-                        return HomeScreenCard(
-                          title: '${playlistController.songList[index].name}  ',
-                        );
-                      }),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),
