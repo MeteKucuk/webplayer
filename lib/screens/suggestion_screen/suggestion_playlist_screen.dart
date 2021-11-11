@@ -12,8 +12,6 @@ class SuggestionScreen extends StatefulWidget {
 
 class _SuggestionScreenState extends State<SuggestionScreen> {
   final playlistController = PlaylistController.to;
-  bool isHover = false;
-  Offset mousPos = const Offset(0, 0);
 
   ScrollController? _scrollController;
 

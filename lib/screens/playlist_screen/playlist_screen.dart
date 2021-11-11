@@ -13,10 +13,25 @@ class PlayListScreen extends StatefulWidget {
 
 class _PlayListScreenState extends State<PlayListScreen> {
   ScrollController? _scrollController;
+  bool isHeaderOpen = true;
+  double lastOffset = 0;
   @override
   void initState() {
     _scrollController = ScrollController();
     super.initState();
+    // ignore: avoid_print
+    // ignore: avoid_print
+    _scrollController?.addListener(() {
+      print(isHeaderOpen);
+      if (_scrollController?.offset == lastOffset) {
+        isHeaderOpen = true;
+      } else {
+        isHeaderOpen = false;
+      }
+      setState(() {
+        lastOffset == _scrollController?.offset;
+      });
+    });
   }
 
   @override
@@ -31,7 +46,7 @@ class _PlayListScreenState extends State<PlayListScreen> {
       appBar: appBar(),
       body: Container(
         width: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.black54,
         ),
         child: Scrollbar(
@@ -40,7 +55,13 @@ class _PlayListScreenState extends State<PlayListScreen> {
           child: ListView(
             controller: _scrollController,
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20.0),
-            children: [PlayListHeader(), const TracksList()],
+            children: [
+              PlayListHeader(),
+              const SizedBox(
+                height: 10,
+              ),
+              const TracksList()
+            ],
           ),
         ),
       ),
