@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:music_player/controller/playlist_controller.dart';
-import 'package:music_player/model/track.dart';
-import 'package:music_player/modules/player/player.dart';
+
+import '../../../controller/playlist_controller.dart';
+import '../../../modules/player/player.dart';
 
 class CreateTrackRow extends StatefulWidget {
+  const CreateTrackRow({Key? key}) : super(key: key);
+
   @override
   _CreateTrackRowState createState() => _CreateTrackRowState();
 }
